@@ -1,10 +1,19 @@
-import { Avatar, Text, Button, Paper } from '@mantine/core';
+import { Avatar, Text, Paper } from '@mantine/core';
 import { IconCaretUpFilled } from '@tabler/icons-react';
 import { IconCaretDownFilled } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ stockData, gainers }: any) => {
+  const navigate = useNavigate();
   return (
-    <Paper radius="md" withBorder p="xl" bg="var(--mantine-color-body)">
+    <Paper
+      radius="md"
+      withBorder
+      p="xl"
+      bg="var(--mantine-color-body)"
+      className="cursor-pointer"
+      onClick={() => navigate(`stock/${stockData?.ticker}`)}
+    >
       <Avatar
         className="w-28 h-28 object-cover"
         src="https://i.pinimg.com/564x/dd/31/84/dd3184f55d2908ef8c35b85d00553bcb.jpg"

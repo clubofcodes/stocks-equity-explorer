@@ -16,7 +16,6 @@ const Stocks = () => {
   const { data: DailyStock } = useGetDailyStocksQuery({
     function: 'TIME_SERIES_DAILY'
   });
-
   console.log(data, DailyStock);
   return (
     <section className="section-defaults">
@@ -26,8 +25,8 @@ const Stocks = () => {
           <h2 className="">Top Gainers</h2>
           <div className="grid grid-cols-4 gap-5 my-2">
             {data?.top_gainers
-              .slice(0, 4)
-              .map((stock: Stock, stock_index: number) => (
+              ?.slice(0, 4)
+              ?.map((stock: Stock, stock_index: number) => (
                 <Fragment key={stock_index}>
                   <Card stockData={stock} gainers={true} />
                 </Fragment>
@@ -36,8 +35,8 @@ const Stocks = () => {
           <h2 className="">Top Losers</h2>
           <div className="grid grid-cols-4 gap-5 my-2">
             {data?.top_losers
-              .slice(0, 4)
-              .map((stock: Stock, stock_index: number) => (
+              ?.slice(0, 4)
+              ?.map((stock: Stock, stock_index: number) => (
                 <Fragment key={stock_index}>
                   <Card stockData={stock} gainers={false} />
                 </Fragment>
