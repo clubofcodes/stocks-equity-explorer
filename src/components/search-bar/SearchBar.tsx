@@ -1,33 +1,38 @@
 import { useState } from 'react';
 import { Combobox, InputBase, useCombobox } from '@mantine/core';
-
-const groceries = [
-  '🍎 Apples',
-  '🍌 Bananas',
-  '🥦 Broccoli',
-  '🥕 Carrots',
-  '🍫 Chocolate',
-  '🍇 Grapes'
-];
+import { useDebouncedValue, useShallowEffect } from '@mantine/hooks';
+import { useGetSearchStocksQuery } from '@/services/repo.service';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+  const [filterOptions, setFilterOptions] = useState([]);
+  const navigate = useNavigate();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption()
   });
 
   const [value, setValue] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [debounced] = useDebouncedValue(search, 200);
 
-  const shouldFilterOptions = groceries.every(item => item !== search);
-  const filteredOptions = shouldFilterOptions
-    ? groceries.filter(item =>
-        item.toLowerCase().includes(search.toLowerCase().trim())
-      )
-    : groceries;
+  const { data, isFetching } = useGetSearchStocksQuery({
+    keywords: debounced,
+    function: 'SYMBOL_SEARCH'
+  });
 
-  const options = filteredOptions.map(item => (
-    <Combobox.Option value={item} key={item}>
-      {item}
+  useShallowEffect(() => {
+    setFilterOptions(
+      data?.bestMatches?.map(item => {
+        return {
+          value: item?.['1. symbol'],
+          label: item?.['2. name']
+        };
+      })
+    );
+  }, [isFetching]);
+  const options = filterOptions?.map((item, i) => (
+    <Combobox.Option value={item.value} key={i}>
+      {item?.label}
     </Combobox.Option>
   ));
 
@@ -38,6 +43,7 @@ const SearchBar = () => {
       onOptionSubmit={val => {
         setValue(val);
         setSearch(val);
+        navigate(`/stock/${val}`);
         combobox.closeDropdown();
       }}
     >
@@ -63,7 +69,7 @@ const SearchBar = () => {
 
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length > 0 ? (
+          {options?.length > 0 ? (
             options
           ) : (
             <Combobox.Empty>Nothing found</Combobox.Empty>
