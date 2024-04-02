@@ -1,7 +1,8 @@
+import { BASE_URL } from '@/env';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://www.alphavantage.co/query'
+  baseUrl: BASE_URL
   // prepareHeaders: (headers, { getState }) => {
   //   // Add auth mechanism to pass tokens to the header
   //   const token = (getState as unknown as RootState)?.app?.auth?.token;
@@ -16,7 +17,7 @@ export const baseQuery = fetchBaseQuery({
 
 export const apiService = createApi({
   baseQuery,
-  tagTypes: ['GET_SEARCHED_STOCK'],
+  tagTypes: ['GET_SEARCHED_STOCK','GET_DAILY_STOCK'],
   refetchOnReconnect: true,
   endpoints: () => ({})
 });
