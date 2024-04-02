@@ -32,15 +32,17 @@ const Stocks = () => {
                 </Fragment>
               ))}
           </div>
-          <h2 className="">Top Losers</h2>
-          <div className="grid grid-cols-4 gap-5 my-2">
-            {data?.top_losers
-              ?.slice(0, 4)
-              ?.map((stock: Stock, stock_index: number) => (
-                <Fragment key={stock_index}>
-                  <Card stockData={stock} gainers={false} />
-                </Fragment>
-              ))}
+          <div className="pt-5">
+            <h2 className="">Top Losers</h2>
+            <div className="grid grid-cols-4 gap-5 my-2">
+              {data?.top_losers
+                .slice(0, 4)
+                .map((stock: Stock, stock_index: number) => (
+                  <Fragment key={stock_index}>
+                    <Card stockData={stock} gainers={false} />
+                  </Fragment>
+                ))}
+            </div>
           </div>
         </div>
       ) : (
