@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetStockDetailsQuery } from '@/services/repo.service';
-import { AreaChart } from '@mantine/charts';
-import { transformData } from '@/utils/customFunctions';
+import { isEmpty } from '@/utils/customFunctions';
 
 const StockDetails: FC = () => {
   const { id } = useParams();
@@ -15,17 +14,9 @@ const StockDetails: FC = () => {
       refetchOnMountOrArgChange: true
     }
   );
+
   return (
-    <div className="p-10">
-      StockDetails:{id}
-      <AreaChart
-        h={300}
-        data={transformData(data)}
-        dataKey="date"
-        series={[{ name: 'Apples', color: 'indigo.6' }]}
-        curveType="linear"
-      />
-    </div>
+    <div className="p-10">{!isEmpty(data) ? <>StockDetails:{id}</> : null}</div>
   );
 };
 
