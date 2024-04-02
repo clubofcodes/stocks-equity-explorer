@@ -4,26 +4,26 @@ import { IconCaretDownFilled } from '@tabler/icons-react';
 
 const Card = ({ stockData, gainers }: any) => {
   return (
-    <Paper radius="md" withBorder p="lg" bg="var(--mantine-color-body)">
+    <Paper radius="md" withBorder p="xl" bg="var(--mantine-color-body)">
       <Avatar
-        className="w-24 h-24 object-cover"
+        className="w-28 h-28 object-cover"
         src="https://i.pinimg.com/564x/dd/31/84/dd3184f55d2908ef8c35b85d00553bcb.jpg"
         size={80}
         radius={80}
         mx="auto"
       />
 
-      <Text ta="center" fz="lg" fw={500} mt="md">
+      <Text ta="center" fz="xl" fw={600} pt="lg">
         {stockData.ticker}
       </Text>
-      <Text ta="center" c="dimmed" fz="sm">
+      <Text ta="center" c="dimmed" fz="md">
         ${stockData.change_amount}
       </Text>
       {gainers ? (
         <Text
           ta="center"
           c="dimmed"
-          fz="sm"
+          fz="md"
           className="flex justify-center items-center text-green"
         >
           <IconCaretUpFilled />
