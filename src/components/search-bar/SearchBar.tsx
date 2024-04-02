@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Combobox, InputBase, useCombobox } from '@mantine/core';
 import { useDebouncedValue, useShallowEffect } from '@mantine/hooks';
-import { useGetSearchStocksQuery } from '@/services/repo.service';
+import { useGetSearchStocksQuery } from '@/services/stocks.service';
 import { useNavigate } from 'react-router-dom';
+import { DynamicDataObject, LabelValueOptionType } from '@/types/common';
 
 const SearchBar = () => {
-  const [filterOptions, setFilterOptions] = useState([]);
+  const [filterOptions, setFilterOptions] = useState<[]>([]);
   const navigate = useNavigate();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption()
@@ -22,7 +23,7 @@ const SearchBar = () => {
 
   useShallowEffect(() => {
     setFilterOptions(
-      data?.bestMatches?.map(item => {
+      data?.bestMatches?.map((item: DynamicDataObject) => {
         return {
           value: item?.['1. symbol'],
           label: item?.['2. name']
@@ -30,9 +31,10 @@ const SearchBar = () => {
       })
     );
   }, [isFetching]);
-  const options = filterOptions?.map((item, i) => (
-    <Combobox.Option value={item.value} key={i}>
-      {item?.label}
+
+  const options = filterOptions?.map((item: LabelValueOptionType, i) => (
+    <Combobox.Option value={item?.['value']} key={i}>
+      {item?.['label']}
     </Combobox.Option>
   ));
 

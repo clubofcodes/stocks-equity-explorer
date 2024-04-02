@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { API_KEY } from '@/env';
 import { apiService } from '@services/api.service.ts';
 
@@ -11,8 +10,8 @@ const stocks = apiService.injectEndpoints({
           method: 'GET',
           params: {
             function: params.function,
-            keywords:params.keywords,
-            apikey: API_KEY,
+            keywords: params.keywords,
+            apikey: API_KEY
           }
         };
       },
@@ -65,9 +64,9 @@ const stocks = apiService.injectEndpoints({
           url: ``,
           method: 'GET',
           params: {
-            function:'TIME_SERIES_DAILY',
+            function: 'TIME_SERIES_DAILY',
             symbol: params.symbol,
-            apikey: API_KEY,
+            apikey: API_KEY
           }
         };
       },
@@ -77,7 +76,7 @@ const stocks = apiService.injectEndpoints({
           return response;
         }
       }
-    }),
+    })
   })
 });
 

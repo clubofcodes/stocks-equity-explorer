@@ -1,53 +1,46 @@
-import { Avatar, Text, Button, Paper, Box } from '@mantine/core';
+import { Stock } from '@/types/stock';
+import { Avatar, Text, Paper, Box } from '@mantine/core';
 import { IconCaretUpFilled } from '@tabler/icons-react';
 import { IconCaretDownFilled } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ stockData, gainers }: any) => {
+interface CardPropsT {
+  stockData: Stock;
+  isGainers?: boolean;
+}
+
+const Card = ({ stockData, isGainers }: CardPropsT) => {
   const navigate = useNavigate();
   return (
     <Paper
       radius="md"
       withBorder
-      p="xl"
+      p="md"
       bg="var(--mantine-color-body)"
-      className="cursor-pointer"
+      className="cursor-pointer border-theme"
       onClick={() => navigate(`stock/${stockData?.ticker}`)}
     >
       <Avatar
-        className="w-28 h-28 object-cover shadow-xl"
+        className="w-24 h-24 object-cover shadow-xl"
         src="https://i.pinimg.com/564x/dd/31/84/dd3184f55d2908ef8c35b85d00553bcb.jpg"
-        size={80}
+        size={60}
         mx="auto"
       />
-      <Box pt="xl">
-        <Text ta="center" fz="xl" fw={600}>
+      <Box pt="md" className="space-y-2">
+        <Text ta="center" c="dimmed" fz="xl">
           {stockData.ticker}
         </Text>
-        <Text ta="center" c="dimmed" fz="md">
+        <Text ta="center" fz="md" fw={600}>
           ${stockData.change_amount}
         </Text>
-        {gainers ? (
-          <Text
-            ta="center"
-            c="dimmed"
-            fz="md"
-            className="flex justify-center items-center text-green"
-          >
-            <IconCaretUpFilled />
-            {stockData.change_amount} ({stockData.change_percentage})
-          </Text>
-        ) : (
-          <Text
-            ta="center"
-            c="dimmed"
-            fz="sm"
-            className="flex justify-center items-center text-green"
-          >
-            <IconCaretDownFilled />
-            {stockData.change_amount} ({stockData.change_percentage})
-          </Text>
-        )}
+        <Text
+          className={`flex justify-center items-center ${isGainers ? 'text-green-600' : 'text-red-600'}`}
+          ta="center"
+          fz="md"
+        >
+          {isGainers ? <IconCaretUpFilled /> : <IconCaretDownFilled />}
+          {stockData.change_amount} ({stockData.change_percentage})
+        </Text>
       </Box>
     </Paper>
   );

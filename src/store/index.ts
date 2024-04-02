@@ -8,6 +8,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { apiService } from '@services/api.service.ts';
 
+// Required for authentication module only and it's an additional from our side.
 const persistConfig = {
   keyPrefix: 'pro:',
   key: 'pro',
@@ -28,8 +29,8 @@ const persistConfig = {
 export const store = configureStore({
   devTools: import.meta.env.MODE === 'development',
   reducer: {
-    app: persistReducer<RootAppState>(persistConfig, appReducer),
-    [apiService.reducerPath]: apiService.reducer
+    app: persistReducer<RootAppState>(persistConfig, appReducer), // regular redux-toolkit for authentication modules
+    [apiService.reducerPath]: apiService.reducer // Using RTK-Query used in this for public pages
   },
   middleware: gdm =>
     gdm({

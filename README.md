@@ -1,4 +1,5 @@
-# React Quick starter - Typescript
+# Stocks-equity-explorer - Typescript
+
 A drop-in replacement for CRA (Create React App) with simple yet advance setup.
 
 ### Equipped with
@@ -11,4 +12,5 @@ A drop-in replacement for CRA (Create React App) with simple yet advance setup.
 - Prettier
 - EsLint
 - Vite
-------- 
+
+---
