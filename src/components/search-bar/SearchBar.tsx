@@ -4,6 +4,7 @@ import { useDebouncedValue, useShallowEffect } from '@mantine/hooks';
 import { useGetSearchStocksQuery } from '@/services/stocks.service';
 import { useNavigate } from 'react-router-dom';
 import { DynamicDataObject, LabelValueOptionType } from '@/types/common';
+import { IconSearch } from '@tabler/icons-react';
 
 const SearchBar = () => {
   const [filterOptions, setFilterOptions] = useState<[]>([]);
@@ -51,7 +52,9 @@ const SearchBar = () => {
     >
       <Combobox.Target>
         <InputBase
-          rightSection={<Combobox.Chevron />}
+          size="xl"
+          radius={'md'}
+          leftSection={<IconSearch />}
           value={search}
           onChange={event => {
             combobox.openDropdown();

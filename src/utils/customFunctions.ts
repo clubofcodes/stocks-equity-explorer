@@ -19,3 +19,7 @@ export const isEmpty = (orgValue: any) => {
     Object.keys(checkValue).length === 0
   );
 };
+
+export const extractInitailObjectKey = (dataObj: any, metaName: string) => {
+  return dataObj?.[Object.keys(dataObj)?.[0]]?.[metaName];
+};
