@@ -9,7 +9,7 @@ import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { LSColorSchemeManager } from '@/theme/manager/LSColorSchemeManager.ts';
 import Router from '@/routes/Router.tsx';
 
-export const appMode: 'light' | 'dark' | 'auto' = 'auto';
+export const appMode: 'light' | 'dark' | 'auto' = 'light';
 
 const LSSchemeManager = LSColorSchemeManager({
   key: 'color-scheme'

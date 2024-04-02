@@ -3,6 +3,8 @@ import {
   useGetTopStocksQuery
 } from '@/services/repo.service';
 import { Stock } from './stock';
+import Card from '../card/Card';
+import SearchBar from '../search-bar/SearchBar';
 
 const Stocks = () => {
   const { data } = useGetTopStocksQuery({
@@ -15,30 +17,25 @@ const Stocks = () => {
 
   console.log(data, DailyStock);
   return (
-    <section className="p-10">
-      <h2 className="section-title">Top Gainers</h2>
-      <div className="grid grid-cols-4 gap-5 my-5">
-        {data?.top_gainers.map((stock: Stock, i: number) => (
-          <div key={i} className="card border border-gray-200">
-            <p>Symbol : {stock.ticker}</p>
-            <p>Change Amount: {stock.change_amount}</p>
-            <p>Change Percentage : {stock.change_percentage}</p>
-            <p>Price : {stock.price}</p>
-            <p>Volume : {stock.volume}</p>
-          </div>
-        ))}
-      </div>
-      <h2 className="section-title">Top Losers</h2>
-      <div className="grid grid-cols-4 gap-5 my-5">
-        {data?.top_losers.map((stock: Stock, i: number) => (
-          <div key={i} className="card border border-gray-200">
-            <p>Symbol : {stock.ticker}</p>
-            <p>Change Amount: {stock.change_amount}</p>
-            <p>Change Percentage : {stock.change_percentage}</p>
-            <p>Price : {stock.price}</p>
-            <p>Volume : {stock.volume}</p>
-          </div>
-        ))}
+    <section className="section-defaults">
+      <SearchBar />
+      <div className="container mx-auto">
+        <h2 className="">Top Gainers</h2>
+        <div className="grid grid-cols-4 gap-5 my-5">
+          {data?.top_gainers.slice(0, 4).map((stock: Stock, i: number) => (
+            <>
+              <Card stockData={stock} gainers={true} />
+            </>
+          ))}
+        </div>
+        <h2 className="section-title">Top Losers</h2>
+        <div className="grid grid-cols-4 gap-5 my-5">
+          {data?.top_losers.slice(0, 4).map((stock: Stock, i: number) => (
+            <>
+              <Card stockData={stock} gainers={false} />
+            </>
+          ))}
+        </div>
       </div>
     </section>
   );
