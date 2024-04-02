@@ -1,3 +1,5 @@
+import SearchBar from '../search-bar/SearchBar';
+
 const Stocks = () => {
   // const [topData, setTopData] = useState(null);
 
@@ -9,7 +11,8 @@ const Stocks = () => {
   // }, []);
 
   return (
-    <section className="section-defaults">
+    <section className="section-defaults gap-6">
+      <SearchBar />
       <div className="container mx-auto border border-solid border-red-900">
         <div className="grid grid-rows-2 gap-5">
           <div className="grid grid-cols-4">
