@@ -57,12 +57,31 @@ const stocks = apiService.injectEndpoints({
           return response;
         }
       }
-    })
+    }),
+    getStockDetails: build.query<any, any>({
+      query: params => {
+        return {
+          url: ``,
+          method: 'GET',
+          params: {
+            symbol: params.symbol,
+            apikey: API_KEY
+          }
+        };
+      },
+      providesTags: [{ type: 'GET_STOCK_DETAILS' }],
+      transformResponse: (response, meta) => {
+        if (meta?.response?.ok) {
+          return response;
+        }
+      }
+    }),
   })
 });
 
 export const {
   useGetSearchStocksQuery,
   useGetTopStocksQuery,
-  useGetDailyStocksQuery
+  useGetDailyStocksQuery,
+  useGetStockDetailsQuery
 } = stocks;
