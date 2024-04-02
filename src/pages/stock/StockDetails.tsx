@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetStockDetailsQuery } from '@/services/repo.service';
+import { useGetStockDetailsQuery } from '@/services/stocks.service';
 import { isEmpty } from '@/utils/customFunctions';
 
 const StockDetails: FC = () => {
