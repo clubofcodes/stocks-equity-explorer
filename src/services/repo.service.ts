@@ -11,7 +11,8 @@ const stocks = apiService.injectEndpoints({
           method: 'GET',
           params: {
             function: params.function,
-            apikey: API_KEY
+            keywords:params.keywords,
+            apikey: API_KEY,
           }
         };
       },
@@ -64,8 +65,9 @@ const stocks = apiService.injectEndpoints({
           url: ``,
           method: 'GET',
           params: {
+            function:'TIME_SERIES_DAILY',
             symbol: params.symbol,
-            apikey: API_KEY
+            apikey: API_KEY,
           }
         };
       },
