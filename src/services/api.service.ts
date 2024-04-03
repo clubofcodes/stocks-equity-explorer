@@ -1,22 +1,23 @@
+import { BASE_URL } from '@/env';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://www.alphavantage.co/query'
-  // prepareHeaders: (headers, { getState }) => {
-  //   // Add auth mechanism to pass tokens to the header
-  //   const token = (getState as unknown as RootState)?.app?.auth?.token;
-  //   if (token?.access) {
-  //     headers.set('Authorization', `Bearer ${token.access}`);
-  //   } else {
-  //     headers.delete('Authorization');
-  //   }
-  //   return headers;
-  // }
+  baseUrl: BASE_URL,
+  prepareHeaders: headers => {
+    headers.set('User-Agent', 'request');
+    return headers;
+  }
 });
 
 export const apiService = createApi({
   baseQuery,
-  tagTypes: ['GET_SEARCHED_STOCK'],
+  tagTypes: [
+    'GET_SEARCHED_STOCK',
+    'GET_DAILY_STOCK',
+    'GET_STOCK_DETAILS',
+    'GET_STOCK_OVERVIEW'
+  ],
   refetchOnReconnect: true,
+  refetchOnMountOrArgChange: true,
   endpoints: () => ({})
 });

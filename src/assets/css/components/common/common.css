@@ -3,5 +3,5 @@
 <p/m/spacing> <shadow> <animation> */
 
 .section-defaults {
-  @apply px-5 py-10 flex items-center justify-center
+  @apply flex flex-col items-center justify-center min-h-screen px-5 py-10
 }

@@ -1,16 +1,17 @@
-import { MantineThemeColorsOverride } from "@mantine/core";
+import { MantineThemeColorsOverride } from '@mantine/core';
 
 export const ThemeColors: MantineThemeColorsOverride = {
   theme: [
-    "#ffe8f2",
-    "#ffd0df",
-    "#fc9ebc",
-    "#fa6a98",
-    "#f73e78",
-    "#f72464",
-    "#f7155a",
-    "#dd064b",
-    "#c60042",
-    "#ae0037",
-  ],
+    '#ffffff',
+    '#fbf4ea',
+    '#f7ead6',
+    '#f3e0c2',
+    '#efd5ae',
+    '#eccb9a',
+    '#e8c186',
+    '#e4b672',
+    '#e0ac5e',
+    '#dca24a',
+    '#d99836'
+  ]
 };

@@ -9,7 +9,13 @@ export default {
       centered: true,
       padding: "1rem",
     },
-    extend: {},
+    extend: {
+      colors: {
+        theme: {
+          DEFAULT: '#d99836', //Default theme color
+        }
+      }
+    },
   },
   plugins: [],
 };
