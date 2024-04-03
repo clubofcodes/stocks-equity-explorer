@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   useGetStockDetailsQuery,
@@ -6,11 +6,7 @@ import {
 } from '@/services/stocks.service';
 import { Alert, Loader, Progress } from '@mantine/core';
 import { extractInitailObjectKey } from '@/utils/customFunctions';
-import { notifications } from '@mantine/notifications';
-import classes from './ErrorAlert.module.css';
 import { IconInfoCircle } from '@tabler/icons-react';
-
-const today = new Date();
 
 const StockDetails: FC = () => {
   const { id } = useParams();
@@ -34,15 +30,6 @@ const StockDetails: FC = () => {
     );
 
   console.log({ stock_overview_data, overview_loading, data, isLoading });
-
-  useEffect(() => {
-    notifications.show({
-      color: 'red',
-      title: 'Notification with custom styles',
-      message: 'It is red',
-      classNames: classes
-    });
-  }, [isError]);
 
   if (
     isError ||

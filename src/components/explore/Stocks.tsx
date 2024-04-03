@@ -3,23 +3,40 @@ import { useGetTopStocksQuery } from '@/services/stocks.service';
 import { Stock } from '../../types/stock';
 import Card from '../card/Card';
 import SearchBar from '../search-bar/SearchBar';
-import { isEmpty } from '@/utils/customFunctions';
-import { Loader } from '@mantine/core';
+import { Alert, Loader } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 const Stocks = () => {
-  const { data } = useGetTopStocksQuery({
+  const { data, isLoading, isError } = useGetTopStocksQuery({
     function: 'TOP_GAINERS_LOSERS'
   });
 
   const gainerAutoplay = useRef(Autoplay({ delay: 2000 }));
   const losersAutoplay = useRef(Autoplay({ delay: 2000 }));
 
+  if (isError || data?.['Information']) {
+    const icon = <IconInfoCircle />;
+    return (
+      <section className="container mx-auto py-10 flex justify-center items-center h-full">
+        <Alert
+          p={26}
+          variant="light"
+          color="red"
+          title="Alert title"
+          icon={icon}
+        >
+          {data?.['Information']}
+        </Alert>
+      </section>
+    );
+  }
+
   return (
     <section className="section-defaults gap-16">
       <SearchBar />
-      {!isEmpty(data) ? (
+      {!(isLoading || isError) ? (
         <div className="container mx-auto">
           <h2 className="my-4">Top Gainers</h2>
           <Carousel
@@ -52,7 +69,7 @@ const Stocks = () => {
               onMouseEnter={losersAutoplay.current.stop}
               onMouseLeave={losersAutoplay.current.reset}
             >
-              {data?.top_losers.map((stock: Stock, stock_index: number) => (
+              {data?.top_losers?.map((stock: Stock, stock_index: number) => (
                 <Carousel.Slide key={stock_index}>
                   <Card stockData={stock} />
                 </Carousel.Slide>
