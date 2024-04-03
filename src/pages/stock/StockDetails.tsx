@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   useGetStockDetailsQuery,
@@ -6,11 +6,7 @@ import {
 } from '@/services/stocks.service';
 import { Alert, Loader, Progress } from '@mantine/core';
 import { extractInitailObjectKey } from '@/utils/customFunctions';
-import { notifications } from '@mantine/notifications';
-import classes from './ErrorAlert.module.css';
 import { IconInfoCircle } from '@tabler/icons-react';
-
-const today = new Date();
 
 const StockDetails: FC = () => {
   const { id } = useParams();
@@ -32,17 +28,6 @@ const StockDetails: FC = () => {
         skip: !id
       }
     );
-
-  console.log({ stock_overview_data, overview_loading, data, isLoading });
-
-  useEffect(() => {
-    notifications.show({
-      color: 'red',
-      title: 'Notification with custom styles',
-      message: 'It is red',
-      classNames: classes
-    });
-  }, [isError]);
 
   if (
     isError ||
@@ -67,7 +52,7 @@ const StockDetails: FC = () => {
 
   return (
     <section className="container mx-auto py-10 flex justify-center items-center h-full">
-      {!isLoading ? (
+      {!(isLoading || overview_loading) ? (
         <div className="bg-white w-full rounded-2xl p-8">
           <div className="w-full pb-5">
             <div className="flex flex-wrap justify-between w-full gap-3 pb-2">
