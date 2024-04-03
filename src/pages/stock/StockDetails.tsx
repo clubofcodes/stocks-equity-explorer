@@ -29,8 +29,6 @@ const StockDetails: FC = () => {
       }
     );
 
-  console.log({ stock_overview_data, overview_loading, data, isLoading });
-
   if (
     isError ||
     data?.['Information'] ||
@@ -54,7 +52,7 @@ const StockDetails: FC = () => {
 
   return (
     <section className="container mx-auto py-10 flex justify-center items-center h-full">
-      {!isLoading ? (
+      {!(isLoading || overview_loading) ? (
         <div className="bg-white w-full rounded-2xl p-8">
           <div className="w-full pb-5">
             <div className="flex flex-wrap justify-between w-full gap-3 pb-2">
